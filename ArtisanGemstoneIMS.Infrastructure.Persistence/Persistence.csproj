@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <RootNamespace>ArtisanGemstoneIMS.Infrastructure.Persistence</RootNamespace>
+	  <AssemblyName>ArtisanGemstoneIMS.Infrastructure.Persistence</AssemblyName>
+  </PropertyGroup>
+
+</Project>
