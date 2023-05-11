@@ -1,4 +1,5 @@
 ﻿using ArtisanGemstoneIMS.Domain.Common;
+using ArtisanGemstoneIMS.Domain.Inventories;
 using ArtisanGemstoneIMS.Domain.Products;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ public class IMSDatabaseContext : DbContext
     }
 
     public DbSet<Product> Products { get; set; }
+    public DbSet<Inventory> Inventories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

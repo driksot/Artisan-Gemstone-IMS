@@ -1,4 +1,5 @@
 ﻿using ArtisanGemstoneIMS.Application.Contracts.Persistence;
+using ArtisanGemstoneIMS.Domain.Inventories;
 using ArtisanGemstoneIMS.Domain.Products;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,15 +25,15 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
         _context.Add(product);
 
-        //var newInventory = new Inventory
-        //{
-        //    ProductId = product.Id,
-        //    Product = product,
-        //    QuantityOnHand = 0,
-        //    IdealQuantity = 0
-        //};
+        var newInventory = new Inventory
+        {
+            ProductId = product.Id,
+            Product = product,
+            QuantityOnHand = 0,
+            IdealQuantity = 0
+        };
 
-        //_context.Inventories.Add(newInventory);
+        _context.Inventories.Add(newInventory);
 
         await _context.SaveChangesAsync();
     }
