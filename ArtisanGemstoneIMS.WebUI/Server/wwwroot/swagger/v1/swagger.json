@@ -6,6 +6,171 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/Inventories": {
+      "get": {
+        "tags": [
+          "Inventories"
+        ],
+        "operationId": "Inventories_GetAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoriesListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Inventories/{id}": {
+      "get": {
+        "tags": [
+          "Inventories"
+        ],
+        "operationId": "Inventories_GetByProductId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryDetailsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Inventories/quantityOnHand": {
+      "patch": {
+        "tags": [
+          "Inventories"
+        ],
+        "operationId": "Inventories_UpdateQuantityOnHand",
+        "requestBody": {
+          "x-name": "inventoryAdjustment",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryAdjustmentDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Inventories/idealQuantity": {
+      "patch": {
+        "tags": [
+          "Inventories"
+        ],
+        "operationId": "Inventories_UpdateIdealQuantity",
+        "requestBody": {
+          "x-name": "inventoryAdjustment",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryAdjustmentDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Products": {
       "get": {
         "tags": [
@@ -236,7 +401,7 @@
   },
   "components": {
     "schemas": {
-      "ProductsListDto": {
+      "InventoriesListDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -244,22 +409,16 @@
             "type": "string",
             "format": "guid"
           },
-          "sku": {
-            "type": "string"
+          "product": {
+            "$ref": "#/components/schemas/ProductDetailsDto"
           },
-          "name": {
-            "type": "string"
+          "quantityOnHand": {
+            "type": "integer",
+            "format": "int32"
           },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "isArchived": {
-            "type": "boolean"
+          "idealQuantity": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -300,6 +459,37 @@
           }
         }
       },
+      "InventoryDetailsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductDetailsDto"
+          },
+          "quantityOnHand": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idealQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
       "ProblemDetails": {
         "type": "object",
         "additionalProperties": {
@@ -326,6 +516,47 @@
           "instance": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "InventoryAdjustmentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "inventoryId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "adjustment": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ProductsListDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "isArchived": {
+            "type": "boolean"
           }
         }
       },
