@@ -1,0 +1,39 @@
+﻿<MudTable Items="@Products" FixedHeader="true" Hover="true" Striped="true" Filter="new Func<ProductsListDto,bool>(FilterFunc)" @bind-SelectedItem="selectedProduct">
+    <ToolBarContent>
+        <MudButton Href="products/new"
+                      DisableElevation
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.Add"
+                   IconColor="Color.Surface">New Product</MudButton>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<ProductsListDto, object>(x=>x.Sku)">SKU</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ProductsListDto, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ProductsListDto, object>(x=>x.Price)">Price</MudTableSortLabel></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Sku">@context.Sku</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Price">@context.Price.ToString("c")</MudTd>
+        <MudTd>
+            <MudButton Href="@($"products/update/{context.Id}")"
+                       Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit"
+                       Color="Color.Primary" Class="ms-1 my-1">
+                Edit
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Archive"
+                       Color="Color.Error"
+                       Class="ms-1 my-1">
+                Archive
+            </MudButton> @*TODO: Make this only visible to Admins*@
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

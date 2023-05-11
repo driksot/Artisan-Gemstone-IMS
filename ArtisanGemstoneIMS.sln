@@ -12,19 +12,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{11469F1D-E2F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{FB4AC61E-6D55-475F-A628-70E4404F8C9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "ArtisanGemstoneIMS.WebUI\Server\Server.csproj", "{14B406AC-A06B-41DC-B45C-9864B0B809F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "ArtisanGemstoneIMS.WebUI\Server\Server.csproj", "{14B406AC-A06B-41DC-B45C-9864B0B809F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "ArtisanGemstoneIMS.WebUI\Client\Client.csproj", "{017E0622-1A9F-4EBE-ADA0-6612A03535A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "ArtisanGemstoneIMS.WebUI\Client\Client.csproj", "{017E0622-1A9F-4EBE-ADA0-6612A03535A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "ArtisanGemstoneIMS.WebUI\Shared\Shared.csproj", "{DC5413C7-5523-45A1-99CC-57FC2C655A9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "ArtisanGemstoneIMS.WebUI\Shared\Shared.csproj", "{DC5413C7-5523-45A1-99CC-57FC2C655A9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "ArtisanGemstoneIMS.Application\Application.csproj", "{E51C1840-FCB8-495B-AE46-662C254AD2A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "ArtisanGemstoneIMS.Application\Application.csproj", "{E51C1840-FCB8-495B-AE46-662C254AD2A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{70DB602A-BEB5-4846-B578-35B85AD87A8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "ArtisanGemstoneIMS.Infrastructure.Persistence\Persistence.csproj", "{6DD226CB-A3AA-47B8-A3D8-365018D4229F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "ArtisanGemstoneIMS.Infrastructure.Persistence\Persistence.csproj", "{6DD226CB-A3AA-47B8-A3D8-365018D4229F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "ArtisanGemstoneIMS.Domain\Domain.csproj", "{D449B268-95D4-4964-A503-AA7353A51A27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "ArtisanGemstoneIMS.Domain\Domain.csproj", "{D449B268-95D4-4964-A503-AA7353A51A27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
