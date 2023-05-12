@@ -98,6 +98,7 @@
         "ArtisanGemstoneIMS.WebUI.Shared.Customers",
         "ArtisanGemstoneIMS.WebUI.Shared.Inventories",
         "ArtisanGemstoneIMS.WebUI.Shared.Products",
+        "ArtisanGemstoneIMS.Application.Addresses.Commands",
         "ArtisanGemstoneIMS.Application.Customers.Commands",
         "ArtisanGemstoneIMS.Application.Products.Commands",
         "Microsoft.AspNetCore.Mvc"
