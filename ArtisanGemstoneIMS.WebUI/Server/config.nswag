@@ -95,8 +95,10 @@
       "className": "{controller}Client",
       "operationGenerationMode": "MultipleClientsFromOperationId",
       "additionalNamespaceUsages": [
+        "ArtisanGemstoneIMS.WebUI.Shared.Customers",
         "ArtisanGemstoneIMS.WebUI.Shared.Inventories",
         "ArtisanGemstoneIMS.WebUI.Shared.Products",
+        "ArtisanGemstoneIMS.Application.Customers.Commands",
         "ArtisanGemstoneIMS.Application.Products.Commands",
         "Microsoft.AspNetCore.Mvc"
       ],
