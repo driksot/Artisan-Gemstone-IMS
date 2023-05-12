@@ -1,6 +1,6 @@
 ﻿<EditForm Model="Product" OnValidSubmit="HandleValidSubmit">
     <MudGrid>
-        <MudItem xs="10">
+        <MudItem xs="12">
             <MudCard>
                 <MudCardContent>
                     <MudTextField @bind-Value="Product.Sku" Label="Sku" Variant="Variant.Outlined" Class="mb-4" />
@@ -33,13 +33,13 @@
                 </MudCardActions>
             </MudCard>
         </MudItem>
-        <MudItem xs="2">
+        @*<MudItem xs="2">
             <MudCard>
                 <MudCardContent Class="d-flex justify-content-center" Style="flex-direction:column">
-                    @*<ImageUpload OnChange="AssignImageUrl" ImgUrl="@Product.ImageUrl" />*@
+                    <ImageUpload OnChange="AssignImageUrl" ImgUrl="@Product.ImageUrl" />
                 </MudCardContent>
             </MudCard>
-        </MudItem>
+        </MudItem>*@
     </MudGrid>
 </EditForm>
 

@@ -1,0 +1,36 @@
+﻿<MudTable Items="@Inventories" FixedHeader="true" Hover="true" Striped="true" Filter="new Func<InventoriesListDto,bool>(FilterFunc)"
+          @bind-SelectedItem="selectedInventory" CanCancelEdit="true" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
+          RowEditCommit="ItemHasBeenCommitted">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<InventoriesListDto, object>(x=>x.Product.Sku)">SKU</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<InventoriesListDto, object>(x=>x.Product.Name)">Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<InventoriesListDto, object>(x=>x.Product.Price)">Price</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<InventoriesListDto, object>(x=>x.QuantityOnHand)">Stock</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<InventoriesListDto, object>(x=>x.IdealQuantity)">Ideal Stock</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="SKU">@context.Product.Sku</MudTd>
+        <MudTd DataLabel="Name">@context.Product.Name</MudTd>
+        <MudTd DataLabel="Price">@context.Product.Price.ToString("c")</MudTd>
+        <MudTd DataLabel="QuantityOnHand">@context.QuantityOnHand</MudTd>
+        <MudTd DataLabel="IdealQuantity">@context.IdealQuantity</MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd DataLabel="SKU">@context.Product.Sku</MudTd>
+        <MudTd DataLabel="Name">@context.Product.Name</MudTd>
+        <MudTd DataLabel="Price">@context.Product.Price.ToString("c")</MudTd>
+        <MudTd DataLabel="QuantityOnHand">
+            <MudNumericField @bind-Value="@context.QuantityOnHand" Required Min="0" />
+        </MudTd>
+        <MudTd DataLabel="IdealQuantity">
+            <MudNumericField @bind-Value="@context.IdealQuantity" Required Min="0" />
+        </MudTd>
+    </RowEditingTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
