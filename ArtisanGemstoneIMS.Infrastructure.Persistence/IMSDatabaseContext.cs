@@ -2,6 +2,7 @@
 using ArtisanGemstoneIMS.Domain.Customers;
 using ArtisanGemstoneIMS.Domain.Inventories;
 using ArtisanGemstoneIMS.Domain.Products;
+using ArtisanGemstoneIMS.Domain.SalesOrders;
 using Microsoft.EntityFrameworkCore;
 
 namespace ArtisanGemstoneIMS.Infrastructure.Persistence;
@@ -16,6 +17,8 @@ public class IMSDatabaseContext : DbContext
     public DbSet<Inventory> Inventories { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Address> CustomerAddresses { get; set; }
+    public DbSet<SalesOrder> SalesOrders { get; set; }
+    public DbSet<LineItem> LineItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
