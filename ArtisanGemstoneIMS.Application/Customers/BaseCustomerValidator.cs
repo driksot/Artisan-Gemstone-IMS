@@ -12,10 +12,10 @@ public class BaseCustomerValidator : AbstractValidator<BaseCustomerDto>
     {
         _addressRepository = addressRepository;
 
-        RuleFor(c => c.PrimaryAddressId)
-            .NotNull()
-            .MustAsync(AddressMustExist)
-            .WithMessage("{PropertyName} does not exist.");
+        //RuleFor(c => c.PrimaryAddressId)
+        //    .NotNull()
+        //    .MustAsync(AddressMustExist)
+        //    .WithMessage("{PropertyName} does not exist.");
     }
 
     private async Task<bool> AddressMustExist(Guid id, CancellationToken token)

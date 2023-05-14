@@ -1,6 +1,5 @@
 ﻿using ArtisanGemstoneIMS.Application.Addresses.Commands;
 using ArtisanGemstoneIMS.Application.Addresses.Queries;
-using ArtisanGemstoneIMS.Application.Customers.Queries;
 using ArtisanGemstoneIMS.WebUI.Shared.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +23,7 @@ public class AddressesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<AddressDto>>> GetAll()
     {
-        var addresses = await _mediator.Send(new GetCustomerDetailsQuery());
+        var addresses = await _mediator.Send(new GetAddressesListQuery());
         return Ok(addresses);
     }
 

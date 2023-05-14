@@ -933,9 +933,8 @@
           "lastName": {
             "type": "string"
           },
-          "primaryAddressId": {
-            "type": "string",
-            "format": "guid"
+          "primaryAddress": {
+            "$ref": "#/components/schemas/AddressDto"
           },
           "phoneNumber": {
             "type": "string"
