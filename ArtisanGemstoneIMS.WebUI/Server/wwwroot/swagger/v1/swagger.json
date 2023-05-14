@@ -732,6 +732,182 @@
           }
         }
       }
+    },
+    "/api/SalesOrders/open": {
+      "get": {
+        "tags": [
+          "SalesOrders"
+        ],
+        "operationId": "SalesOrders_GetOpenOrders",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SalesOrdersListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SalesOrders/closed": {
+      "get": {
+        "tags": [
+          "SalesOrders"
+        ],
+        "operationId": "SalesOrders_GetClosedOrders",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SalesOrdersListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SalesOrders/{id}": {
+      "get": {
+        "tags": [
+          "SalesOrders"
+        ],
+        "operationId": "SalesOrders_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalesOrderDetailsDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SalesOrders"
+        ],
+        "operationId": "SalesOrders_MarkFulfilled",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SalesOrders": {
+      "post": {
+        "tags": [
+          "SalesOrders"
+        ],
+        "operationId": "SalesOrders_GenerateOrder",
+        "requestBody": {
+          "x-name": "order",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateOrderCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1141,6 +1317,147 @@
             }
           }
         ]
+      },
+      "SalesOrdersListDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "soNumber": {
+            "type": "string"
+          },
+          "customer": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomerDetailsDto"
+              }
+            ]
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "totalCost": {
+            "type": "number",
+            "format": "double"
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemDto"
+            }
+          }
+        }
+      },
+      "LineItemDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unitPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "product": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ProductDetailsDto"
+              }
+            ]
+          }
+        }
+      },
+      "SalesOrderDetailsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "soNumber": {
+            "type": "string"
+          },
+          "customer": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomerDetailsDto"
+              }
+            ]
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "totalCost": {
+            "type": "number",
+            "format": "double"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemDto"
+            }
+          }
+        }
+      },
+      "GenerateOrderCommand": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseSalesOrderDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BaseSalesOrderDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "soNumber": {
+            "type": "string"
+          },
+          "customer": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomerDetailsDto"
+              }
+            ]
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "totalCost": {
+            "type": "number",
+            "format": "double"
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItemDto"
+            }
+          }
+        }
       }
     }
   }
