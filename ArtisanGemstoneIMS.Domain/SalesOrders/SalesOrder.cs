@@ -6,6 +6,9 @@ namespace ArtisanGemstoneIMS.Domain.SalesOrders;
 
 public class SalesOrder : AuditableEntity
 {
+    [Required]
+    public string SONumber { get; set; } = string.Empty;
+
     public Customer? Customer { get; set; }
 
     [Required]
