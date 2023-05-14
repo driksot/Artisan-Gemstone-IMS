@@ -1,0 +1,41 @@
+﻿<MudTable Items="@Customers" FixedHeader="true" Hover="true" Striped="true" Filter="new Func<CustomersListDto,bool>(FilterFunc)" @bind-SelectedItem="selectedCustomer">
+    <ToolBarContent>
+        <MudButton Href="customers/new"
+                   DisableElevation
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.Add"
+                   IconColor="Color.Surface">New Customer</MudButton>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<CustomersListDto, object>(x=>x.LastName)">Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<CustomersListDto, object>(x=>x.PrimaryAddress.AddressLine1)">Address</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<CustomersListDto, object>(x=>x.PrimaryAddress.State)">State</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<CustomersListDto, object>(x=>x.CreatedAt)">Since</MudTableSortLabel></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@($"{context.FirstName} {context.LastName}")</MudTd>
+        <MudTd DataLabel="Address">@($"{context.PrimaryAddress.AddressLine1} {context.PrimaryAddress.AddressLine2}")</MudTd>
+        <MudTd DataLabel="State">@context.PrimaryAddress.State</MudTd>
+        <MudTd DataLabel="Since">@context.CreatedAt?.ToString("d")</MudTd>
+        <MudTd>
+            <MudButton Href="@($"customers/update/{context.Id}")"
+                       Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit"
+                       Color="Color.Primary" Class="ms-1 my-1">
+                Edit
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Archive"
+                       Color="Color.Error"
+                       Class="ms-1 my-1">
+                Archive
+            </MudButton> @*TODO: Make this only visible to Admins*@
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

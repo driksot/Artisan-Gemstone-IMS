@@ -1,0 +1,53 @@
+﻿<EditForm Model="Customer" OnValidSubmit="HandleValidSubmit">
+    <MudCard>
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="Customer.FirstName" Label="First Name" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="Customer.LastName" Label="Last Name" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="Customer.PhoneNumber" Label="Phone Number" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="Customer.Email" Label="Email" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="Customer.PrimaryAddress.AddressLine1" Label="Address" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="Customer.PrimaryAddress.AddressLine2" Label="Address Cont." Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="Customer.PrimaryAddress.City" Label="City" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="1">
+                    <MudTextField @bind-Value="Customer.PrimaryAddress.State" Label="State" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="2">
+                    <MudTextField @bind-Value="Customer.PrimaryAddress.Country" Label="Country" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="Customer.PrimaryAddress.PostalCode" Label="Postal Code" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions Class="ms-2 pb-2">
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Save"
+                       Color="Color.Primary"
+                       ButtonType="MudBlazor.ButtonType.Submit">
+                Save
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.ArrowBack"
+                       Color="Color.Secondary"
+                       Class="ms-2"
+                       Href="/customers">
+                Back
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>

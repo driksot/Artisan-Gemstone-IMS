@@ -1,0 +1,10 @@
+﻿@page "/customers/new"
+@page "/customers/update/{id}"
+
+<PageTitle>@($"{Title} Customer")</PageTitle>
+
+<MudText Typo="Typo.h4" Class="card-title fw-bold mb-4" Color="Color.Primary">
+    @($"{Title} Customer".ToUpper())
+</MudText>
+
+<CustomerEditForm Customer="Customer" OnValidSubmit="HandleValidSubmit" />
