@@ -14,6 +14,7 @@ builder.Services.AddScoped<IAddressesClient, AddressesClient>();
 builder.Services.AddScoped<ICustomersClient, CustomersClient>();
 builder.Services.AddScoped<IInventoriesClient, InventoriesClient>();
 builder.Services.AddScoped<IProductsClient, ProductsClient>();
+builder.Services.AddScoped<ISalesOrdersClient, SalesOrdersClient>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddMudServices();

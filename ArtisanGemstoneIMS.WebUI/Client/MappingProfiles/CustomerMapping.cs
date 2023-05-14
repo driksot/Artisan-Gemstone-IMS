@@ -12,6 +12,8 @@ public class CustomerMapping : Profile
         CreateMap<CustomerDetailsDto, CreateCustomerCommand>();
         CreateMap<CustomerDetailsDto, UpdateCustomerCommand>();
 
+        CreateMap<CustomersListDto, CustomerDetailsDto>();
+
         CreateMap<AddressDto, CreateAddressCommand>();
         CreateMap<AddressDto, UpdateAddressCommand>();
     }

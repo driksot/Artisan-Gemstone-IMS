@@ -4,6 +4,8 @@ namespace ArtisanGemstoneIMS.WebUI.Shared.SalesOrders;
 
 public class SalesOrderDetailsDto
 {
+    public Guid Id { get; set; }
+
     public string SONumber { get; set; } = string.Empty;
 
     public CustomerDetailsDto? Customer { get; set; }

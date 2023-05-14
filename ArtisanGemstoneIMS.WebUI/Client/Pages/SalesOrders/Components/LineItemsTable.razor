@@ -1,0 +1,16 @@
+﻿﻿<MudTable Items="ItemList" Hover="true" Striped="true">
+    <HeaderContent>
+        <MudTh>SKU</MudTh>
+        <MudTh>Product</MudTh>
+        <MudTh>Quantity</MudTh>
+        <MudTh>Price</MudTh>
+        <MudTh>Subtotal</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="SKU">@context.Product.Sku</MudTd>
+        <MudTd DataLabel="Product">@context.Product.Name</MudTd>
+        <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+        <MudTd DataLabel="Price">@context.UnitPrice.ToString("c")</MudTd>
+        <MudTd DataLabel="Subtotal">@((context.UnitPrice * context.Quantity).ToString("c"))</MudTd>
+    </RowTemplate>
+</MudTable>

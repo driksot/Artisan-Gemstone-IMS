@@ -1,0 +1,17 @@
+﻿@page "/orders"
+
+<PageTitle>Manage Sales Orders</PageTitle>
+
+<MudText Typo="Typo.h4" Class="card-title fw-bold mb-4" Color="Color.Primary">@("Manage Open Orders".ToUpper())</MudText>
+
+<OpenOrdersTable />
+
+<br />
+
+<MudText Typo="Typo.h4" Class="card-title fw-bold mb-4" Color="Color.Primary">@("Manage Closed Orders".ToUpper())</MudText>
+
+<ClosedOrdersTable />
+
+@code {
+
+}

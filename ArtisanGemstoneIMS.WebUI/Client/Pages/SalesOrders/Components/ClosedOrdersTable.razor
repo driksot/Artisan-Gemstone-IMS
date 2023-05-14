@@ -1,0 +1,25 @@
+﻿<MudTable Items="@Orders" FixedHeader="true" Hover="true" Striped="true" Filter="new Func<SalesOrdersListDto,bool>(FilterFunc)" @bind-SelectedItem="selectedOrder">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<SalesOrdersListDto, object>(x=>x.SONumber)">Order #</MudTableSortLabel></MudTh>
+        <MudTh>Products</MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<SalesOrdersListDto, object>(x=>x.TotalCost)">Cost</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<SalesOrdersListDto, object>(x=>x.UpdatedAt)">Completion Date</MudTableSortLabel></MudTh>
+        <MudTh>View Order</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Order Number">@context.SONumber</MudTd>
+        <MudTd DataLabel="Products">@context.LineItems.Count</MudTd>
+        <MudTd DataLabel="Cost">@context.TotalCost.ToString("c")</MudTd>
+        <MudTd DataLabel="CreationDate">@context.UpdatedAt?.ToString("d")</MudTd>
+        <MudTd DataLabel="Preview Order">
+            <MudIcon Icon="@Icons.Material.Filled.ViewList" @onclick="() => NavigateToPreview(context.Id)" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

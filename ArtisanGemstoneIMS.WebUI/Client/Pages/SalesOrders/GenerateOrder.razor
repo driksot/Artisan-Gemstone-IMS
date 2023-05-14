@@ -1,0 +1,20 @@
+﻿@page "/orders/new"
+
+<MudElement HtmlTag="section" Class="d-flex justify-space-between align-center">
+    <MudText Typo="Typo.h4" Class="card-title fw-bold mb-4" Color="Color.Primary">@("Generate Order".ToUpper())</MudText>
+    <MudButton Variant="Variant.Filled"
+            StartIcon="@Icons.Material.Filled.ArrowBack"
+            Color="Color.Secondary"
+            Class="ms-2"
+            Href="/orders">
+        Back
+    </MudButton>
+</MudElement>
+
+<br />
+
+<GenerateOrderEditForm />
+
+@code {
+
+}

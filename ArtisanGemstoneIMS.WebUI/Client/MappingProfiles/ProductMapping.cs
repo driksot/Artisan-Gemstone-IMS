@@ -10,5 +10,7 @@ public class ProductMapping : Profile
     {
         CreateMap<ProductDetailsDto, CreateProductCommand>();
         CreateMap<ProductDetailsDto, UpdateProductCommand>();
+
+        CreateMap<ProductsListDto, ProductDetailsDto>();
     }
 }

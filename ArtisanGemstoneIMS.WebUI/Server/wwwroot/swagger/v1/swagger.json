@@ -1344,6 +1344,16 @@
             "type": "number",
             "format": "double"
           },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "lineItems": {
             "type": "array",
             "items": {
@@ -1382,6 +1392,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
           "soNumber": {
             "type": "string"
           },
