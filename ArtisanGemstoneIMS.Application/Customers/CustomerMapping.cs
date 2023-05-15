@@ -9,8 +9,8 @@ public class CustomerMapping : Profile
 {
     public CustomerMapping()
     {
-        CreateMap<Customer, CustomersListDto>();
-        CreateMap<Customer, CustomerDetailsDto>();
+        CreateMap<Customer, CustomersListDto>().ReverseMap();
+        CreateMap<Customer, CustomerDetailsDto>().ReverseMap();
         CreateMap<BaseCustomerDto, Customer>();
         CreateMap<CreateCustomerCommand, Customer>();
         CreateMap<UpdateCustomerCommand, Customer>();

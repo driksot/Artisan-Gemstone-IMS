@@ -39,7 +39,7 @@ public partial class OpenOrdersTable
 
     private void NavigateToPreview(Guid id)
     {
-        NavigationManager.NavigateTo("/orders/preview/{id}");
+        NavigationManager.NavigateTo($"/orders/preview/{id}");
     }
 
     private async Task CompleteOrder(Guid id)

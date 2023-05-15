@@ -1,0 +1,46 @@
+﻿@page "/orders/preview/{id}"
+
+<MudElement HtmlTag="section" Class="d-flex mt-2">
+    <MudText Typo="Typo.h4" Class="card-title fw-bold mb-4" Color="Color.Primary">@("Preview Order".ToUpper())</MudText>
+    <MudSpacer />
+    <MudButton Variant="Variant.Filled"
+            StartIcon="@Icons.Material.Filled.ArrowBack"
+            Color="Color.Secondary"
+            Class="mb-5"
+            Href="/orders">
+        Back
+    </MudButton>
+</MudElement>
+
+<MudCard id="printarea">
+    <MudCardContent Class="pa-6">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudText Typo="Typo.h5"
+                        Class="card-title fw-bold mb-4"
+                        Color="Color.Primary">@($"Invoice #{Order.SONumber}")</MudText>
+            </MudItem>
+
+            <AddressLine Customer="Customer" />
+
+            <OrderInfoLine SalesOrder="Order" />
+
+            <OrderSummaryTable ItemList="LineItems" GrandTotal="grandTotal" />
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<br />
+
+<MudElement HtmlTag="section" Class="d-flex justify-center">
+
+    <MudButton DisableElevation
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.Filled.Print"
+               IconColor="Color.Surface"
+               @onclick="PrintInvoice">
+        Print Invoice
+    </MudButton>
+
+    </MudElement>

@@ -1,0 +1,44 @@
+﻿﻿<MudItem xs="12">
+
+    <MudText Typo="Typo.h5"
+             Class="card-title fw-bold mb-4"
+             Color="Color.Primary">Order Summary</MudText>
+    
+    @if (ItemList.Count > 0)
+    {
+        <MudSimpleTable Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center" style="width:40%;">Product</th>
+                    <th scope="col" class="text-center" style="width:16%">Quantity</th>
+                    <th scope="col" class="text-center" style="width:22%">Price</th>
+                    <th scope="col" class="text-center" style="width:22%;">SubTotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ItemList)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @item.Product?.Name
+                        </td>
+                        <td class="align-middle text-center">
+                            @item.Quantity
+                        </td>
+                        <td class="align-middle text-center">
+                            @item.Product?.Price.ToString("c")
+                        </td>
+                        <td class="align-middle text-center">
+                            @((item.Product?.Price * item.Quantity)?.ToString("c"))
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3" class="align-middle text-center">Balance due upon receipt:</td>
+                    <td scope="col" class="align-middle text-center">@GrandTotal.ToString("c")</td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+    }
+
+</MudItem>

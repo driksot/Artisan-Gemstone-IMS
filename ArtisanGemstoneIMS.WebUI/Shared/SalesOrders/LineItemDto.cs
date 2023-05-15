@@ -10,5 +10,7 @@ public class LineItemDto
 
     public double UnitPrice { get; set; }
 
+    public Guid ProductId { get; set; }
+
     public ProductDetailsDto? Product { get; set; }
 }

@@ -19,5 +19,7 @@ public class Product : AuditableEntity
     [Range(0, int.MaxValue)]
     public double Price { get; set; }
 
+    public string? ImageUrl { get; set; }
+
     public bool IsArchived { get; set; } = false;
 }

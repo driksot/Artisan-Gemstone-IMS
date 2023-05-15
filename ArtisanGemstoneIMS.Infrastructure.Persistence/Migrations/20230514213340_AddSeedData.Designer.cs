@@ -4,6 +4,7 @@ using ArtisanGemstoneIMS.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(IMSDatabaseContext))]
-    partial class IMSDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230514213340_AddSeedData")]
+    partial class AddSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +68,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerAddresses", (string)null);
+                    b.ToTable("CustomerAddresses");
 
                     b.HasData(
                         new
@@ -156,7 +159,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("PrimaryAddressId");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
 
                     b.HasData(
                         new
@@ -230,7 +233,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Inventories", (string)null);
+                    b.ToTable("Inventories");
 
                     b.HasData(
                         new
@@ -415,7 +418,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -636,7 +639,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SalesOrderId");
 
-                    b.ToTable("LineItems", (string)null);
+                    b.ToTable("LineItems");
                 });
 
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.SalesOrders.SalesOrder", b =>
@@ -668,7 +671,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("SalesOrders", (string)null);
+                    b.ToTable("SalesOrders");
                 });
 
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.Customers.Customer", b =>

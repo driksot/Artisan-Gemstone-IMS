@@ -1,51 +1,52 @@
 ﻿<EditForm Model="selectedLineItems" OnValidSubmit="HandleValidSubmit">
-    <MudGrid>
-        <MudItem xs="12">
-            <MudCard>
-                <MudCardContent>
-                    <MudItem xs="12">
-                        <MudSelect @bind-Value="selectedCustomer" Label="Customer" Class="pb-2">
-                            <MudSelectItem Value="selectedCustomer">Select a Customer</MudSelectItem>
-                            @foreach (var customer in Customers)
-                            {
-                                <MudSelectItem Value="@customer">@($"{customer.FirstName} {customer.LastName}")</MudSelectItem>
-                            }
-                        </MudSelect>
-                        <ValidationMessage For="@(() => selectedCustomer)" />
-                    </MudItem>
-                    <MudItem xs="10">
-                        <MudSelect @bind-Value="selectedLineItem" Label="Product" Class="pb-2">
-                            <MudSelectItem Value="selectedLineItem">Select a Product</MudSelectItem>
-                            @foreach (var item in LineItems)
-                            {
-                                <MudSelectItem Value="@item">@item.Product.Name</MudSelectItem>
-                            }
-                        </MudSelect>
-                        <ValidationMessage For="@(() => selectedLineItem.Product)" />
-                    </MudItem>
-                    <MudItem xs="2">
-                        <MudNumericField @bind-Value="@selectedLineItem.Quantity" Label="Quantity" Variant="Variant.Text" Min="0" />
-                        <ValidationMessage For="@(() => selectedLineItem.Quantity)" />
-                    </MudItem>
-                </MudCardContent>
-                <MudCardActions Class="ms-2 pb-2">
-                    <MudButton Variant="Variant.Filled"
-                               StartIcon="@Icons.Material.Filled.Save"
-                               Color="Color.Tertiary"
-                               ButtonType="MudBlazor.ButtonType.Submit">
-                        Add Line Item
-                    </MudButton>
-                    <MudButton Variant="Variant.Filled"
-                               StartIcon="@Icons.Material.Filled.AddToQueue"
-                               Color="Color.Primary"
-                               Class="ms-2"
-                               @onclick="FinalizeOrder">
-                        Finalize Order
-                    </MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
+    <MudCard>
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="Order.SONumber" Label="Order Number" Variant="Variant.Outlined" Class="mb-4" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect @bind-Value="selectedCustomer" Label="Customer" Class="mb-4">
+                        <MudSelectItem Value="selectedCustomer">Select a Customer</MudSelectItem>
+                        @foreach (var customer in Customers)
+                        {
+                            <MudSelectItem Value="@customer">@($"{customer.FirstName} {customer.LastName}")</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <ValidationMessage For="@(() => selectedCustomer)" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect @bind-Value="selectedLineItem" Label="Product" Class="mb-4">
+                        <MudSelectItem Value="selectedLineItem">Select a Product</MudSelectItem>
+                        @foreach (var item in LineItems)
+                        {
+                            <MudSelectItem Value="@item">@item.Product.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <ValidationMessage For="@(() => selectedLineItem.Product)" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudNumericField @bind-Value="@selectedLineItem.Quantity" Label="Quantity" Variant="Variant.Text" Min="0" />
+                    <ValidationMessage For="@(() => selectedLineItem.Quantity)" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions Class="ms-2 mb-4 d-flex justify-end">
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Save"
+                       Color="Color.Tertiary"
+                       ButtonType="MudBlazor.ButtonType.Submit">
+                Add Line Item
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.AddToQueue"
+                       Color="Color.Primary"
+                       Class="ms-2"
+                       @onclick="FinalizeOrder">
+                Finalize Order
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
 </EditForm>
 
 <br />

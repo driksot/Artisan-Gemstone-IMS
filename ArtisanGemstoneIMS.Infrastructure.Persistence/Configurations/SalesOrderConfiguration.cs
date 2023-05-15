@@ -14,6 +14,7 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
             .WithMany()
             .HasForeignKey(so => so.CustomerId);
 
-        builder.HasMany(so => so.LineItems);
+        builder.HasMany(so => so.LineItems)
+            .WithOne();
     }
 }

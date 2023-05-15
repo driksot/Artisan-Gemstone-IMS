@@ -9,5 +9,6 @@ public class SalesOrderMapping : Profile
     public SalesOrderMapping()
     {
         CreateMap<SalesOrderDetailsDto, GenerateOrderCommand>();
+        CreateMap<LineItemDto, BaseLineItemDto>();
     }
 }

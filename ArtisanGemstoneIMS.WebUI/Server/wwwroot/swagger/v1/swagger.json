@@ -1378,6 +1378,10 @@
             "type": "number",
             "format": "double"
           },
+          "productId": {
+            "type": "string",
+            "format": "guid"
+          },
           "product": {
             "nullable": true,
             "oneOf": [
@@ -1398,6 +1402,10 @@
           },
           "soNumber": {
             "type": "string"
+          },
+          "customerId": {
+            "type": "string",
+            "format": "guid"
           },
           "customer": {
             "nullable": true,
@@ -1450,13 +1458,9 @@
           "soNumber": {
             "type": "string"
           },
-          "customer": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/CustomerDetailsDto"
-              }
-            ]
+          "customerId": {
+            "type": "string",
+            "format": "guid"
           },
           "isPaid": {
             "type": "boolean"
@@ -1468,8 +1472,26 @@
           "lineItems": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/LineItemDto"
+              "$ref": "#/components/schemas/BaseLineItemDto"
             }
+          }
+        }
+      },
+      "BaseLineItemDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unitPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "productId": {
+            "type": "string",
+            "format": "guid"
           }
         }
       }

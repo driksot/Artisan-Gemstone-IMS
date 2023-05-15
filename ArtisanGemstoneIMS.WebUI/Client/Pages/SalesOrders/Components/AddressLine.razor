@@ -1,0 +1,22 @@
+﻿﻿<MudItem xs="6">
+    <address>
+        <strong>Agate Mountain Jewelry</strong><br>
+        1234 Agate Mountain Dr.<br>
+        Springfield, ST 54321<br>
+        Phoenix, AZ 85004
+    </address>
+</MudItem>
+<MudItem xs="6" Class="d-flex justify-end">
+    <address>
+        <strong>Purchaser:</strong><br>
+        @($"{Customer.FirstName} {Customer.LastName}")<br>
+        @Customer.PrimaryAddress.AddressLine1<br>
+        @if (Customer.PrimaryAddress.AddressLine2 is not null)
+        {
+            <span>@Customer.PrimaryAddress.AddressLine2</span>
+
+            <br>
+        }
+        @($"{Customer.PrimaryAddress.City}, {Customer.PrimaryAddress.State} {Customer.PrimaryAddress.PostalCode}")
+    </address>
+</MudItem>

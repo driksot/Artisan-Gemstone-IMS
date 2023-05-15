@@ -8,4 +8,5 @@ public interface ISalesOrderRepository : IGenericRepository<SalesOrder>
     Task<IReadOnlyList<SalesOrder>> GetClosedOrdersAsync();
     Task<SalesOrder> GetWithDetailsByIdAsync(Guid id);
     Task MarkFulfilledAsync(Guid id);
+    Task GenerateOrderAsync(SalesOrder order);
 }

@@ -99,3 +99,24 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    #appbar {
+        visibility: hidden;
+    }
+
+    #printarea, #printarea * {
+        visibility: visible;
+    }
+
+    #printarea {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

@@ -78,12 +78,13 @@ public partial class GenerateOrderEditForm
         foreach (var lineItem in selectedLineItems)
         {
             totalCost += lineItem.UnitPrice * lineItem.Quantity;
+            if (lineItem.Product != null)
+                lineItem.ProductId = lineItem.Product.Id;
         }
 
         Order.LineItems = selectedLineItems;
         Order.TotalCost = totalCost;
-        Order.Customer = Mapper.Map<CustomerDetailsDto>(selectedCustomer);
-        //Order.SONumber = 
+        Order.CustomerId = selectedCustomer.Id;
 
         var generateOrder = Mapper.Map<GenerateOrderCommand>(Order);
         await SalesOrdersClient.GenerateOrderAsync(generateOrder);

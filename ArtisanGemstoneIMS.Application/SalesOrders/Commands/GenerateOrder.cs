@@ -43,7 +43,7 @@ public class GenerateOrderCommandHandler : IRequestHandler<GenerateOrderCommand,
             throw new BadRequestException("Invalid Sales Order", validationResult);
 
         var order = _mapper.Map<SalesOrder>(request);
-        await _salesOrderRepository.CreateAsync(order);
+        await _salesOrderRepository.GenerateOrderAsync(order);
 
         return Unit.Value;
     }

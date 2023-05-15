@@ -8,6 +8,8 @@ public class SalesOrderDetailsDto
 
     public string SONumber { get; set; } = string.Empty;
 
+    public Guid CustomerId { get; set; }
+
     public CustomerDetailsDto? Customer { get; set; }
 
     public bool IsPaid { get; set; } = false;
