@@ -23,10 +23,10 @@
         <MudTd DataLabel="Cost">@context.TotalCost.ToString("c")</MudTd>
         <MudTd DataLabel="CreationDate">@context.CreatedAt?.ToString("d")</MudTd>
         <MudTd DataLabel="Mark Complete">
-            <MudIcon Icon="@Icons.Material.Filled.Check" @onclick="() => CompleteOrder(context.Id)" />
+            <MudIcon Icon="@Icons.Material.Filled.Check" Class="cursor-pointer" @onclick="() => CompleteOrder(context.Id)" />
         </MudTd>
         <MudTd DataLabel="Preview Order">
-            <MudIcon Icon="@Icons.Material.Filled.ViewList" @onclick="() => NavigateToPreview(context.Id)" />
+            <MudIcon Icon="@Icons.Material.Filled.OpenInNew" Class="cursor-pointer" @onclick="() => NavigateToPreview(context.Id)" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

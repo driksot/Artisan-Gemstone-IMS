@@ -40,6 +40,7 @@ public partial class GenerateOrderEditForm
     private CustomersListDto selectedCustomer = new CustomersListDto();
     private LineItemDto selectedLineItem = new LineItemDto();
     private InventoryDetailsDto selectedInventory = new InventoryDetailsDto();
+    private int currentQuantity = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,6 +70,8 @@ public partial class GenerateOrderEditForm
         selectedLineItems.Add(selectedLineItem);
 
         selectedLineItem = LineItems[0];
+
+        currentQuantity = 0;
     }
 
     private async Task FinalizeOrder()
@@ -115,18 +118,11 @@ public partial class GenerateOrderEditForm
         var product = lineItem.Product;
         selectedInventory = await InventoriesClient.GetByProductIdAsync(product.Id);
         var inventoryQuantityOnHand = selectedInventory.QuantityOnHand;
-        var currentQuantity = 0;
 
-        foreach (var item in selectedLineItems)
+        if (lineItem.Quantity > inventoryQuantityOnHand)
         {
-            if (item.Id == lineItem.Id)
-            {
-                currentQuantity += item.Quantity;
-            }
-        }
-
-        if (lineItem.Quantity + currentQuantity > inventoryQuantityOnHand)
             return false;
+        }
 
         return true;
     }

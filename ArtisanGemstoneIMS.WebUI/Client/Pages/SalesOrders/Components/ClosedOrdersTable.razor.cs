@@ -5,6 +5,9 @@ namespace ArtisanGemstoneIMS.WebUI.Client.Pages.SalesOrders.Components;
 
 public partial class ClosedOrdersTable
 {
+    [Parameter]
+    public IEnumerable<SalesOrdersListDto> Orders { get; set; } = new List<SalesOrdersListDto>();
+
     [Inject]
     public ISalesOrdersClient SalesOrdersClient { get; set; } = null!;
 
@@ -13,9 +16,8 @@ public partial class ClosedOrdersTable
 
     private string searchString = "";
     private SalesOrdersListDto selectedOrder = new SalesOrdersListDto();
-    private IEnumerable<SalesOrdersListDto> Orders = new List<SalesOrdersListDto>();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         Orders = await SalesOrdersClient.GetClosedOrdersAsync();
     }
@@ -39,6 +41,6 @@ public partial class ClosedOrdersTable
 
     private void NavigateToPreview(Guid id)
     {
-        NavigationManager.NavigateTo("/orders/preview/{id}");
+        NavigationManager.NavigateTo($"/orders/preview/{id}");
     }
 }

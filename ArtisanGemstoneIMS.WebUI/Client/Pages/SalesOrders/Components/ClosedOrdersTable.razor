@@ -16,7 +16,7 @@
         <MudTd DataLabel="Cost">@context.TotalCost.ToString("c")</MudTd>
         <MudTd DataLabel="CreationDate">@context.UpdatedAt?.ToString("d")</MudTd>
         <MudTd DataLabel="Preview Order">
-            <MudIcon Icon="@Icons.Material.Filled.ViewList" @onclick="() => NavigateToPreview(context.Id)" />
+            <MudIcon Icon="@Icons.Material.Filled.OpenInNew" Class="cursor-pointer" @onclick="() => NavigateToPreview(context.Id)" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

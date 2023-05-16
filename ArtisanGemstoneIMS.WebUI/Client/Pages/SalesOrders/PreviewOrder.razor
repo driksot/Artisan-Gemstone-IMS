@@ -12,22 +12,24 @@
     </MudButton>
 </MudElement>
 
-<MudCard id="printarea">
-    <MudCardContent Class="pa-6">
-        <MudGrid>
-            <MudItem xs="12">
-                <MudText Typo="Typo.h5"
-                        Class="card-title fw-bold mb-4"
-                        Color="Color.Primary">@($"Invoice #{Order.SONumber}")</MudText>
-            </MudItem>
+<MudCard>
+    <div id="printarea">
+        <MudCardContent Class="pa-6">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h5"
+                            Class="card-title fw-bold mb-4"
+                            Color="Color.Primary">@($"Invoice #{Order.SONumber}")</MudText>
+                </MudItem>
 
-            <AddressLine Customer="Customer" />
+                <AddressLine Customer="Customer" />
 
-            <OrderInfoLine SalesOrder="Order" />
+                <OrderInfoLine SalesOrder="Order" />
 
-            <OrderSummaryTable ItemList="LineItems" GrandTotal="grandTotal" />
-        </MudGrid>
-    </MudCardContent>
+                <OrderSummaryTable ItemList="LineItems" GrandTotal="grandTotal" />
+            </MudGrid>
+        </MudCardContent>
+    </div>
 </MudCard>
 
 <br />

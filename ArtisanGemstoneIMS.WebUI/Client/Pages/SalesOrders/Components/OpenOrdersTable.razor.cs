@@ -1,10 +1,17 @@
 using ArtisanGemstoneIMS.WebUI.Shared.SalesOrders;
 using Microsoft.AspNetCore.Components;
+using System.ComponentModel;
 
 namespace ArtisanGemstoneIMS.WebUI.Client.Pages.SalesOrders.Components;
 
 public partial class OpenOrdersTable
 {
+    [Parameter]
+    public EventCallback OnCompleteOrder { get; set; }
+
+    [Parameter]
+    public IEnumerable<SalesOrdersListDto> Orders { get; set; } = new List<SalesOrdersListDto>();
+
     [Inject]
     public ISalesOrdersClient SalesOrdersClient { get; set; } = null!;
 
@@ -13,9 +20,8 @@ public partial class OpenOrdersTable
 
     private string searchString = "";
     private SalesOrdersListDto selectedOrder = new SalesOrdersListDto();
-    private IEnumerable<SalesOrdersListDto> Orders = new List<SalesOrdersListDto>();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         Orders = await SalesOrdersClient.GetOpenOrdersAsync();
     }
@@ -45,6 +51,6 @@ public partial class OpenOrdersTable
     private async Task CompleteOrder(Guid id)
     {
         await SalesOrdersClient.MarkFulfilledAsync(id);
-        StateHasChanged();
+        await OnCompleteOrder.InvokeAsync();
     }
 }
