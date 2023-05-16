@@ -65,6 +65,12 @@ public partial class GenerateOrderEditForm
             return;
         }
 
+        if (selectedLineItem.Quantity == 0)
+        {
+            selectedLineItems.Remove(selectedLineItem);
+            return;
+        }
+
         if (selectedLineItems.Contains(selectedLineItem)) return;
 
         selectedLineItems.Add(selectedLineItem);
@@ -88,6 +94,7 @@ public partial class GenerateOrderEditForm
         Order.LineItems = selectedLineItems;
         Order.TotalCost = totalCost;
         Order.CustomerId = selectedCustomer.Id;
+
 
         var generateOrder = Mapper.Map<GenerateOrderCommand>(Order);
         await SalesOrdersClient.GenerateOrderAsync(generateOrder);

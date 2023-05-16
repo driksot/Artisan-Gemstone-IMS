@@ -1,10 +1,12 @@
 ﻿<EditForm Model="selectedLineItems" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
     <MudCard>
         <MudCardContent>
             <MudGrid>
                 <MudItem xs="6">
                     <MudTextField @bind-Value="Order.SONumber" Label="Order Number" Variant="Variant.Outlined" Class="mb-4" />
                 </MudItem>
+                <ValidationMessage For="@(() => Order.SONumber)" />
                 <MudItem xs="6">
                     <MudSelect @bind-Value="selectedCustomer" Label="Customer" Class="mb-4">
                         <MudSelectItem Value="selectedCustomer">Select a Customer</MudSelectItem>
@@ -13,7 +15,7 @@
                             <MudSelectItem Value="@customer">@($"{customer.FirstName} {customer.LastName}")</MudSelectItem>
                         }
                     </MudSelect>
-                    <ValidationMessage For="@(() => selectedCustomer)" />
+                    <ValidationMessage For="@(() => Order.Customer)" />
                 </MudItem>
                 <MudItem xs="6">
                     <MudSelect @bind-Value="selectedLineItem" Label="Product" Class="mb-4">

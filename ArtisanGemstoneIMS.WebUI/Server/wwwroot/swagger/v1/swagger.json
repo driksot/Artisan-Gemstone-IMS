@@ -1395,17 +1395,24 @@
       "SalesOrderDetailsDto": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "soNumber",
+          "customerId",
+          "lineItems"
+        ],
         "properties": {
           "id": {
             "type": "string",
             "format": "guid"
           },
           "soNumber": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "customerId": {
             "type": "string",
-            "format": "guid"
+            "format": "guid",
+            "minLength": 1
           },
           "customer": {
             "nullable": true,
