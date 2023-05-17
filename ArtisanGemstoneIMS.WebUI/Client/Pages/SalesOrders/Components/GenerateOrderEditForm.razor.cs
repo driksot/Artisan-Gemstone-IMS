@@ -32,19 +32,17 @@ public partial class GenerateOrderEditForm
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
-    private List<CustomersListDto> Customers = new List<CustomersListDto>();
+    private List<CustomerDetailsDto> Customers = new List<CustomerDetailsDto>();
     private List<ProductsListDto> Products = new List<ProductsListDto>();
     private List<LineItemDto> LineItems = new List<LineItemDto>();
-    private List<LineItemDto> selectedLineItems = new List<LineItemDto>();
     private SalesOrderDetailsDto Order = new SalesOrderDetailsDto();
-    private CustomersListDto selectedCustomer = new CustomersListDto();
     private LineItemDto selectedLineItem = new LineItemDto();
     private InventoryDetailsDto selectedInventory = new InventoryDetailsDto();
-    private int currentQuantity = 0;
 
     protected override async Task OnInitializedAsync()
     {
-        Customers = (await CustomersClient.GetAllAsync()).ToList();
+        var customerList = (await CustomersClient.GetAllAsync()).ToList();
+        Customers = Mapper.Map<List<CustomerDetailsDto>>(customerList);
         await GetProducts();
 
         if (LineItems.Count > 0)
@@ -52,6 +50,37 @@ public partial class GenerateOrderEditForm
     }
 
     private async Task HandleValidSubmit()
+    {
+        var isValidOrder = await IsOrderValid(Order);
+
+        if (!isValidOrder)
+        {
+            await JSRuntime.InvokeVoidAsync(
+                "alert",
+                "Sales Order is incomplete. Please verify there is an Order #, a customer is selected and line items have been added.");
+            return;
+        }
+
+        double totalCost = 0;
+
+        foreach (var lineItem in Order.LineItems)
+        {
+            totalCost += lineItem.UnitPrice * lineItem.Quantity;
+            if (lineItem.Product != null)
+                lineItem.ProductId = lineItem.Product.Id;
+        }
+
+        Order.TotalCost = totalCost;
+        Order.CustomerId = Order.Customer.Id;
+
+
+        var generateOrder = Mapper.Map<GenerateOrderCommand>(Order);
+        await SalesOrdersClient.GenerateOrderAsync(generateOrder);
+
+        NavigationManager.NavigateTo("/orders");
+    }
+
+    private async Task AddLineItem()
     {
         // Validate order item quantity is not more than product inventory quantity on hand
         var isAvailabileQuantity = await IsQuantityOnHand(selectedLineItem);
@@ -67,39 +96,15 @@ public partial class GenerateOrderEditForm
 
         if (selectedLineItem.Quantity == 0)
         {
-            selectedLineItems.Remove(selectedLineItem);
+            Order.LineItems.Remove(selectedLineItem);
             return;
         }
 
-        if (selectedLineItems.Contains(selectedLineItem)) return;
+        if (Order.LineItems.Contains(selectedLineItem)) return;
 
-        selectedLineItems.Add(selectedLineItem);
+        Order.LineItems.Add(selectedLineItem);
 
         selectedLineItem = LineItems[0];
-
-        currentQuantity = 0;
-    }
-
-    private async Task FinalizeOrder()
-    {
-        double totalCost = 0;
-
-        foreach (var lineItem in selectedLineItems)
-        {
-            totalCost += lineItem.UnitPrice * lineItem.Quantity;
-            if (lineItem.Product != null)
-                lineItem.ProductId = lineItem.Product.Id;
-        }
-
-        Order.LineItems = selectedLineItems;
-        Order.TotalCost = totalCost;
-        Order.CustomerId = selectedCustomer.Id;
-
-
-        var generateOrder = Mapper.Map<GenerateOrderCommand>(Order);
-        await SalesOrdersClient.GenerateOrderAsync(generateOrder);
-
-        NavigationManager.NavigateTo("/orders");
     }
 
     private async Task GetProducts()
@@ -130,6 +135,15 @@ public partial class GenerateOrderEditForm
         {
             return false;
         }
+
+        return true;
+    }
+
+    private async Task<bool> IsOrderValid(SalesOrderDetailsDto order)
+    {
+        if (order == null) return false;
+        if (order.Customer == null) return false;
+        if (order.LineItems.Count == 0) return false;
 
         return true;
     }

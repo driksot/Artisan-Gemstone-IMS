@@ -13,7 +13,7 @@ public class SalesOrderDetailsDto
     [Required]
     public Guid CustomerId { get; set; }
 
-    public CustomerDetailsDto? Customer { get; set; }
+    public CustomerDetailsDto Customer { get; set; } = new CustomerDetailsDto();
 
     public bool IsPaid { get; set; } = false;
 

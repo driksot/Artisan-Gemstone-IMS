@@ -1,4 +1,4 @@
-﻿<EditForm Model="selectedLineItems" OnValidSubmit="HandleValidSubmit">
+﻿<EditForm Model="Order" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <MudCard>
         <MudCardContent>
@@ -8,8 +8,8 @@
                 </MudItem>
                 <ValidationMessage For="@(() => Order.SONumber)" />
                 <MudItem xs="6">
-                    <MudSelect @bind-Value="selectedCustomer" Label="Customer" Class="mb-4">
-                        <MudSelectItem Value="selectedCustomer">Select a Customer</MudSelectItem>
+                    <MudSelect @bind-Value="Order.Customer" Label="Customer" Class="mb-4">
+                        <MudSelectItem Value="Order.Customer">Select a Customer</MudSelectItem>
                         @foreach (var customer in Customers)
                         {
                             <MudSelectItem Value="@customer">@($"{customer.FirstName} {customer.LastName}")</MudSelectItem>
@@ -37,14 +37,14 @@
             <MudButton Variant="Variant.Filled"
                        StartIcon="@Icons.Material.Filled.Save"
                        Color="Color.Tertiary"
-                       ButtonType="MudBlazor.ButtonType.Submit">
+                       @onclick="AddLineItem">
                 Add Line Item
             </MudButton>
             <MudButton Variant="Variant.Filled"
                        StartIcon="@Icons.Material.Filled.AddToQueue"
                        Color="Color.Primary"
                        Class="ms-2"
-                       @onclick="FinalizeOrder">
+                       ButtonType="MudBlazor.ButtonType.Submit">
                 Finalize Order
             </MudButton>
         </MudCardActions>
@@ -53,7 +53,7 @@
 
 <br />
 
-@if (selectedLineItems.Count > 0)
+@if (Order.LineItems.Count > 0)
 {
-    <LineItemsTable ItemList="selectedLineItems" />
+    <LineItemsTable ItemList="Order.LineItems.ToList()" />
 }

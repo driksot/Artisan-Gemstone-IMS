@@ -12,7 +12,7 @@ public class CustomerMapping : Profile
         CreateMap<CustomerDetailsDto, CreateCustomerCommand>();
         CreateMap<CustomerDetailsDto, UpdateCustomerCommand>();
 
-        CreateMap<CustomersListDto, CustomerDetailsDto>();
+        CreateMap<CustomersListDto, CustomerDetailsDto>().ReverseMap();
 
         CreateMap<AddressDto, CreateAddressCommand>();
         CreateMap<AddressDto, UpdateAddressCommand>();

@@ -1415,12 +1415,7 @@
             "minLength": 1
           },
           "customer": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/CustomerDetailsDto"
-              }
-            ]
+            "$ref": "#/components/schemas/CustomerDetailsDto"
           },
           "isPaid": {
             "type": "boolean"
