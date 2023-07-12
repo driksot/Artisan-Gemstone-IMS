@@ -8,4 +8,5 @@ public interface IInventoryRepository : IGenericRepository<Inventory>
     Task<IReadOnlyList<Inventory>> GetCurrentInventoryWithDetailsAsync();
     Task UpdateUnitsAvailableAsync(Guid id, int adjustment);
     Task UpdateIdealQuantityAsync(Guid id, int adjustment);
+    Task<IReadOnlyList<InventorySnapshot>> GetSnapshotHistoryAsync(int numberOfDays);
 }
