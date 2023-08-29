@@ -65,7 +65,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerAddresses");
+                    b.ToTable("CustomerAddresses", (string)null);
 
                     b.HasData(
                         new
@@ -156,7 +156,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("PrimaryAddressId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
 
                     b.HasData(
                         new
@@ -230,7 +230,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventories", (string)null);
 
                     b.HasData(
                         new
@@ -404,49 +404,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("InventorySnapshots");
-                });
-
-            modelBuilder.Entity("ArtisanGemstoneIMS.Domain.Inventories.InventoryTransaction", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("InventoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("PONumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuantityAfter")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityBefore")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SONumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TransactionType")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InventoryId");
-
-                    b.ToTable("InventoryTransactions");
+                    b.ToTable("InventorySnapshots", (string)null);
                 });
 
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.Products.Product", b =>
@@ -485,7 +443,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasData(
                         new
@@ -682,30 +640,6 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ArtisanGemstoneIMS.Domain.PurchaseOrders.PurchaseOrder", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PONumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TotalCost")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PurchaseOrders");
-                });
-
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.SalesOrders.LineItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -713,9 +647,6 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("PurchaseOrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
@@ -731,11 +662,9 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("PurchaseOrderId");
-
                     b.HasIndex("SalesOrderId");
 
-                    b.ToTable("LineItems");
+                    b.ToTable("LineItems", (string)null);
                 });
 
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.SalesOrders.SalesOrder", b =>
@@ -767,7 +696,7 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("SalesOrders");
+                    b.ToTable("SalesOrders", (string)null);
                 });
 
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.Customers.Customer", b =>
@@ -803,17 +732,6 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ArtisanGemstoneIMS.Domain.Inventories.InventoryTransaction", b =>
-                {
-                    b.HasOne("ArtisanGemstoneIMS.Domain.Inventories.Inventory", "Inventory")
-                        .WithMany()
-                        .HasForeignKey("InventoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Inventory");
-                });
-
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.SalesOrders.LineItem", b =>
                 {
                     b.HasOne("ArtisanGemstoneIMS.Domain.Products.Product", "Product")
@@ -821,10 +739,6 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ArtisanGemstoneIMS.Domain.PurchaseOrders.PurchaseOrder", null)
-                        .WithMany("LineItems")
-                        .HasForeignKey("PurchaseOrderId");
 
                     b.HasOne("ArtisanGemstoneIMS.Domain.SalesOrders.SalesOrder", null)
                         .WithMany("LineItems")
@@ -842,11 +756,6 @@ namespace ArtisanGemstoneIMS.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("ArtisanGemstoneIMS.Domain.PurchaseOrders.PurchaseOrder", b =>
-                {
-                    b.Navigation("LineItems");
                 });
 
             modelBuilder.Entity("ArtisanGemstoneIMS.Domain.SalesOrders.SalesOrder", b =>

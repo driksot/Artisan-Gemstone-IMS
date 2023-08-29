@@ -765,104 +765,6 @@
         }
       }
     },
-    "/api/PurchaseOrders": {
-      "get": {
-        "tags": [
-          "PurchaseOrders"
-        ],
-        "operationId": "PurchaseOrders_GetPurchaseOrders",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PurchaseOrderDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "PurchaseOrders"
-        ],
-        "operationId": "PurchaseOrders_GeneratePurchaseOrder",
-        "requestBody": {
-          "x-name": "order",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GeneratePurchaseOrderCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PurchaseOrders/{id}": {
-      "get": {
-        "tags": [
-          "PurchaseOrders"
-        ],
-        "operationId": "PurchaseOrders_GetPurchaseOrdersById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "guid"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PurchaseOrderDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/SalesOrders/open": {
       "get": {
         "tags": [
@@ -1484,21 +1386,27 @@
           }
         ]
       },
-      "PurchaseOrderDto": {
+      "SalesOrdersListDto": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "poNumber",
-          "lineItems"
-        ],
         "properties": {
           "id": {
             "type": "string",
             "format": "guid"
           },
-          "poNumber": {
-            "type": "string",
-            "minLength": 1
+          "soNumber": {
+            "type": "string"
+          },
+          "customer": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomerDetailsDto"
+              }
+            ]
+          },
+          "isPaid": {
+            "type": "boolean"
           },
           "totalCost": {
             "type": "number",
@@ -1549,90 +1457,6 @@
                 "$ref": "#/components/schemas/ProductDetailsDto"
               }
             ]
-          }
-        }
-      },
-      "GeneratePurchaseOrderCommand": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BasePurchaseOrderDto"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
-        ]
-      },
-      "BasePurchaseOrderDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "poNumber": {
-            "type": "string"
-          },
-          "totalCost": {
-            "type": "number",
-            "format": "double"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "lineItems": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LineItemDto"
-            }
-          }
-        }
-      },
-      "SalesOrdersListDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "guid"
-          },
-          "soNumber": {
-            "type": "string"
-          },
-          "customer": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/CustomerDetailsDto"
-              }
-            ]
-          },
-          "isPaid": {
-            "type": "boolean"
-          },
-          "totalCost": {
-            "type": "number",
-            "format": "double"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "lineItems": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LineItemDto"
-            }
           }
         }
       },

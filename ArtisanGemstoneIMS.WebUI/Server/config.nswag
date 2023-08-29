@@ -98,7 +98,6 @@
         "ArtisanGemstoneIMS.WebUI.Shared.Customers",
         "ArtisanGemstoneIMS.WebUI.Shared.Inventories",
         "ArtisanGemstoneIMS.WebUI.Shared.Products",
-        "ArtisanGemstoneIMS.WebUI.Shared.PurchaseOrders",
         "ArtisanGemstoneIMS.WebUI.Shared.SalesOrders",
         "ArtisanGemstoneIMS.Application.Addresses.Commands",
         "ArtisanGemstoneIMS.Application.Customers.Commands",
