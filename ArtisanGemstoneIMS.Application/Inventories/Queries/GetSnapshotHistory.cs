@@ -6,7 +6,7 @@ namespace ArtisanGemstoneIMS.Application.Inventories.Queries;
 
 public class GetSnapshotHistoryQuery : IRequest<SnapshotResponse>
 {
-    public int NumberOfDays { get; set; } = 5;
+    public int NumberOfDays { get; set; } = 2;
 }
 
 public class GetSnapshotHistoryQueryHandler : IRequestHandler<GetSnapshotHistoryQuery, SnapshotResponse>
