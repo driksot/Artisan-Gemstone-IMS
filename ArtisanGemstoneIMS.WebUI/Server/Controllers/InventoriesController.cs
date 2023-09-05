@@ -25,6 +25,14 @@ public class InventoriesController : ControllerBase
         return Ok(inventories);
     }
 
+    // GET: api/<InventoriesController>/lowstock
+    [HttpGet("lowstock")]
+    public async Task<ActionResult<List<InventoriesListDto>>> GetLowStock()
+    {
+        var inventories = await _mediator.Send(new GetLowStockInventoriesQuery());
+        return Ok(inventories);
+    }
+
     // GET api/<InventoriesController>/5
     [HttpGet("{id}")]
     public async Task<ActionResult<InventoryDetailsDto>> GetByProductId(Guid id)

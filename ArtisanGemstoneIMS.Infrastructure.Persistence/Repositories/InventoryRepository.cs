@@ -18,6 +18,15 @@ public class InventoryRepository : GenericRepository<Inventory>, IInventoryRepos
         return inventories;
     }
 
+    public async Task<IReadOnlyList<Inventory>> GetLowStockInventories()
+    {
+        var inventories = await _context.Inventories
+            .Include(i => i.Product)
+            .Where(i => i.QuantityOnHand < i.IdealQuantity)
+            .ToListAsync();
+        return inventories;
+    }
+
     public async Task<IReadOnlyList<InventorySnapshot>> GetSnapshotHistoryAsync(int numberOfDays = 5)
     {
         var earliest = DateTime.Now - TimeSpan.FromDays(numberOfDays);

@@ -141,7 +141,8 @@ classDiagram
         +Guid ProductId
         +int QuantityOnHand
         +int IdealQuantity
-        +GetCurren() IReadOnlyList~Inventory~
+        +GetCurrent() IReadOnlyList~Inventory~
+        +GetLowStock() IReadOnlyList~Inventory~
         +GetByProductId(Guid id) Inventory
         +UpdateUnitsAvailable(Guid id, int adjustment)
         +UpdateIdealQuantity(Guid id, int adjustment)

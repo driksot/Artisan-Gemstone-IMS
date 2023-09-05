@@ -61,23 +61,33 @@ public partial class InventoriesTable
         AddEditionEvent($"RowEditPreview event: made a backup of Inventory {((InventoriesListDto)inventory).Product.Name}");
     }
 
-    private void ItemHasBeenCommitted(object inventory)
+    private async void ItemHasBeenCommitted(object inventory)
     {
         AddEditionEvent($"RowEditCommit event: Changes to Inventory {((InventoriesListDto)inventory).Product.Name}");
+
+        var currentInventory = (await InventoriesClient.GetAllAsync()).Single(i => i.Id == (((InventoriesListDto)inventory).Id));
+
+        var qohAdjustment = currentInventory.QuantityOnHand < ((InventoriesListDto)inventory).QuantityOnHand
+            ? ((InventoriesListDto)inventory).QuantityOnHand - currentInventory.QuantityOnHand
+            : (currentInventory.QuantityOnHand - ((InventoriesListDto)inventory).QuantityOnHand) * -1;
+
+        var idealAdjustment = currentInventory.IdealQuantity < ((InventoriesListDto)inventory).IdealQuantity
+            ? ((InventoriesListDto)inventory).IdealQuantity - currentInventory.IdealQuantity
+            : (currentInventory.IdealQuantity - ((InventoriesListDto)inventory).IdealQuantity) * -1;
 
         AdjustCurrentStock(
             new InventoryAdjustmentDto
             {
-                InventoryId = ((InventoriesListDto)inventory).Id,
-                Adjustment = ((InventoriesListDto)inventory).QuantityOnHand
+                InventoryId = currentInventory.Id,
+                Adjustment = qohAdjustment
             }
         );
 
         AdjustIdealStock(
             new InventoryAdjustmentDto
             {
-                InventoryId = ((InventoriesListDto)inventory).Id,
-                Adjustment = ((InventoriesListDto)inventory).IdealQuantity
+                InventoryId = currentInventory.Id,
+                Adjustment = idealAdjustment
             }
         );
     }
@@ -91,11 +101,16 @@ public partial class InventoriesTable
 
     private void AdjustCurrentStock(InventoryAdjustmentDto inventoryAdjustment)
     {
+        //Console.WriteLine("Current Adjustment = " + inventoryAdjustment.Adjustment);
+
         InventoriesClient.UpdateQuantityOnHandAsync(inventoryAdjustment);
     }
 
     private void AdjustIdealStock(InventoryAdjustmentDto inventoryAdjustmentDto)
     {
+        //Console.WriteLine("Adjustment = " + inventoryAdjustmentDto.Adjustment);
+        //Console.WriteLine(inventoryAdjustmentDto.Adjustment.ToString());
+
         InventoriesClient.UpdateIdealQuantityAsync(inventoryAdjustmentDto);
     }
 }
