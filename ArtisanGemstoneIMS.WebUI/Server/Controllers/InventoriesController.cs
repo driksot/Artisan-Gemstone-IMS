@@ -49,6 +49,14 @@ public class InventoriesController : ControllerBase
         return Ok(response);
     }
 
+    // GET api<InventoriesController>/report/5
+    [HttpGet("report/{numberOfDays}")]
+    public async Task<ActionResult<List<SnapshotDto>>> GetSnapshotReport(int numberOfDays)
+    {
+        var response = await _mediator.Send(new GetSnapshotReportQuery { NumberOfDays = numberOfDays });
+        return Ok(response);
+    }
+
     // PATCH api/<InventoriesController>/quantityOnHand
     [HttpPatch("quantityOnHand")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -10,5 +10,6 @@ public class InventoryMapping : Profile
 	{
 		CreateMap<Inventory, InventoriesListDto>();
 		CreateMap<Inventory, InventoryDetailsDto>();
+		CreateMap<InventorySnapshot, SnapshotDto>();
 	}
 }

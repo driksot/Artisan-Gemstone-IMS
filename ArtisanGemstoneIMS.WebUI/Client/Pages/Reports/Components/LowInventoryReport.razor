@@ -1,5 +1,8 @@
 ﻿
 <div id="printarea" class="w-100">
+    <MudText Typo="Typo.h6" Class="card-title fw-bold mb-4" Color="Color.Primary">
+        @("Low Inventory Report".ToUpper())
+    </MudText>
     <MudTable Items="@Inventories" FixedHeader="true" Hover="true" Striped="true" Filter="new Func<InventoriesListDto,bool>(FilterFunc)">
         <ToolBarContent>
             <MudButton DisableElevation

@@ -1,9 +1,37 @@
 ﻿@page "/reports"
 
-<h3>Reports</h3>
+<PageTitle>Reports</PageTitle>
 
-<LowInventoryReport />
+<MudText Typo="Typo.h4" Class="card-title fw-bold mb-4" Color="Color.Primary">
+    @("Reports".ToUpper())
+</MudText>
 
-@code {
+<div>
+    <MudButton DisableElevation
+                Variant="Variant.Filled"
+                Color="Color.Primary"
+                IconColor="Color.Surface"
+                @onclick="ShowLowInventory">
+         Low Inventory
+     </MudButton>
 
+     <MudButton DisableElevation
+                Variant="Variant.Filled"
+                Color="Color.Primary"
+                IconColor="Color.Surface"
+                @onclick="ShowInventoryHistory">
+         Inventory History
+     </MudButton>
+ </div>
+
+ <hr />
+
+@if (ReportToDisplay.Contains("low inventory"))
+{
+    <LowInventoryReport />
+}
+
+@if (ReportToDisplay.Contains("inventory history"))
+{
+    <InventoryHistoryReport />
 }

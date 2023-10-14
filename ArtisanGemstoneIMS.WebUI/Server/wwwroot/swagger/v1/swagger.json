@@ -451,6 +451,41 @@
         }
       }
     },
+    "/api/Inventories/report/{numberOfDays}": {
+      "get": {
+        "tags": [
+          "Inventories"
+        ],
+        "operationId": "Inventories_GetSnapshotReport",
+        "parameters": [
+          {
+            "name": "numberOfDays",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SnapshotDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Inventories/quantityOnHand": {
       "patch": {
         "tags": [
@@ -1314,6 +1349,27 @@
           "productId": {
             "type": "string",
             "format": "guid"
+          }
+        }
+      },
+      "SnapshotDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductDetailsDto"
+          },
+          "snapshotTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "snapshotQuantity": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
