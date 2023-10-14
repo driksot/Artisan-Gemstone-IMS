@@ -78,4 +78,45 @@ public class ProductTests
         result.ShouldBeOfType<List<ProductsListDto>>();
         result.Count.ShouldBe(3);
     }
+
+    [Fact]
+    public async Task CreateProductWithInventory_Should_Return_MediatRUnit()
+    {
+        // Arrange
+        var handler = new CreateProductCommandHandler(_mapper, _mockRepo.Object);
+
+        // Act
+        var result = await handler.Handle(new CreateProductCommand(), CancellationToken.None);
+
+        // Assert
+        result.ShouldBeOfType<MediatR.Unit>();
+    }
+
+    [Fact]
+    public async Task UpdateAsync_Should_Return_MediatRUnit()
+    {
+        // Arrange
+        var productId = new Guid("ffbc3199-8546-4699-a532-c10a32c564cc");
+        var updateHandler = new UpdateProductCommandHandler(_mapper, _mockRepo.Object);
+
+        // Act
+        var updateResult = await updateHandler.Handle(new UpdateProductCommand { Id = productId }, CancellationToken.None);
+
+        // Assert
+        updateResult.ShouldBeOfType<MediatR.Unit>();
+    }
+
+    [Fact]
+    public async Task ArchiveAsync_Should_Return_MediatRUnit()
+    {
+        // Arrange
+        var productId = new Guid("ffbc3199-8546-4699-a532-c10a32c564cc");
+        var handler = new ArchiveProductCommandHandler(_mockRepo.Object);
+
+        // Act
+        var result = await handler.Handle(new ArchiveProductCommand { Id = productId }, CancellationToken.None);
+
+        // Assert
+        result.ShouldBeOfType<MediatR.Unit>();
+    }
 }

@@ -72,6 +72,12 @@ public class MockProductRepository
                 return Task.CompletedTask;
             });
 
+        mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Product>()))
+            .Returns(Task.CompletedTask);
+
+        mockRepo.Setup(r => r.ArchiveAsync(It.IsAny<Guid>()))
+            .Returns(Task.CompletedTask);
+
         //mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Product>()))
         //    .Returns((Product product) =>
         //    {
