@@ -1,6 +1,6 @@
 ﻿using ArtisanGemstoneIMS.Application.Contracts.Identity;
-using ArtisanGemstoneIMS.Application.Identity;
 using ArtisanGemstoneIMS.Infrastructure.Identity.Models;
+using ArtisanGemstoneIMS.WebUI.Shared.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace ArtisanGemstoneIMS.Infrastructure.Identity.Services;
@@ -29,8 +29,8 @@ public class UserService : IUserService
     public async Task<List<Employee>> GetEmployees()
     {
         var employees = await _userManager.GetUsersInRoleAsync("Employee");
-        return employees.Select(q => new Employee 
-        { 
+        return employees.Select(q => new Employee
+        {
             Id = q.Id,
             Email = q.Email!,
             FirstName = q.FirstName,

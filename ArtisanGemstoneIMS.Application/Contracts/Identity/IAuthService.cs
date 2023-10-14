@@ -1,4 +1,4 @@
-﻿using ArtisanGemstoneIMS.Application.Identity;
+﻿using ArtisanGemstoneIMS.WebUI.Shared.Identity;
 
 namespace ArtisanGemstoneIMS.Application.Contracts.Identity;
 

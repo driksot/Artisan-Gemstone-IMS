@@ -1,10 +1,12 @@
 using ArtisanGemstoneIMS.Application;
 using ArtisanGemstoneIMS.Infrastructure.Persistence;
+using ArtisanGemstoneIMS.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddApplicationServices();
     builder.Services.AddPersistenceServices(builder.Configuration);
+    builder.Services.AddIdentityServices(builder.Configuration);
 
     builder.Services.AddControllersWithViews();
     builder.Services.AddRazorPages();
@@ -37,6 +39,8 @@ var app = builder.Build();
 
     app.UseRouting();
     app.MapRazorPages();
+    app.UseAuthentication();
+    app.UseAuthorization();
     app.MapControllers();
     app.MapFallbackToFile("index.html");
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ArtisanGemstoneIMS.Application.Identity;
+namespace ArtisanGemstoneIMS.WebUI.Shared.Identity;
 
 public class RegistrationRequest
 {

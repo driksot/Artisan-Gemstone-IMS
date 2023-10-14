@@ -1,4 +1,4 @@
-﻿namespace ArtisanGemstoneIMS.Application.Identity;
+﻿namespace ArtisanGemstoneIMS.WebUI.Shared.Identity;
 
 public class AuthRequest
 {

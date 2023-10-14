@@ -1,7 +1,7 @@
 ﻿using ArtisanGemstoneIMS.Application.Common.Exceptions;
 using ArtisanGemstoneIMS.Application.Contracts.Identity;
-using ArtisanGemstoneIMS.Application.Identity;
 using ArtisanGemstoneIMS.Infrastructure.Identity.Models;
+using ArtisanGemstoneIMS.WebUI.Shared.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
